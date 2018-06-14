@@ -1,6 +1,15 @@
 #ifndef CONVERTER_H
 #define CONVERTER_H
 
-int convert(const char* input_file, const char* output_file);
+#include <string>
+
+
+class Converter {
+
+public:
+    static int convertImg(std::string input, std::string output);
+    static int convertVid(std::string input, std::string output);
+
+};
 
 #endif // CONVERTER_H

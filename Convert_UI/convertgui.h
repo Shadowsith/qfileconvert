@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <qlineedit.h>
+#include <qpushbutton.h>
+#include <vector>
 
 namespace Ui {
 class ConvertGui;
@@ -15,14 +17,19 @@ class ConvertGui : public QMainWindow
 public:
     explicit ConvertGui(QWidget *parent = 0);
     ~ConvertGui();
+    void useFileExplorer(QLineEdit* le);
+    void convertFiles();
+    void getLineEdits();
 
 private:
     Ui::ConvertGui *ui;
+    QList<QLineEdit *> lineEdits;
 
 private slots:
-    void convertFiles();
     void clearPaths();
-    void useFileExplorer(QLineEdit* le);
+    void clearLineEdits();
+
+
 };
 
 #endif // CONVERTGUI_H

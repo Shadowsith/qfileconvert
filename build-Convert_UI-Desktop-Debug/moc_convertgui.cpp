@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ConvertGui_t {
-    QByteArrayData data[7];
-    char stringdata0[66];
+    QByteArrayData data[4];
+    char stringdata0[38];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,16 +32,12 @@ struct qt_meta_stringdata_ConvertGui_t {
 static const qt_meta_stringdata_ConvertGui_t qt_meta_stringdata_ConvertGui = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "ConvertGui"
-QT_MOC_LITERAL(1, 11, 12), // "convertFiles"
-QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 10), // "clearPaths"
-QT_MOC_LITERAL(4, 36, 15), // "useFileExplorer"
-QT_MOC_LITERAL(5, 52, 10), // "QLineEdit*"
-QT_MOC_LITERAL(6, 63, 2) // "le"
+QT_MOC_LITERAL(1, 11, 10), // "clearPaths"
+QT_MOC_LITERAL(2, 22, 0), // ""
+QT_MOC_LITERAL(3, 23, 14) // "clearLineEdits"
 
     },
-    "ConvertGui\0convertFiles\0\0clearPaths\0"
-    "useFileExplorer\0QLineEdit*\0le"
+    "ConvertGui\0clearPaths\0\0clearLineEdits"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,7 +47,7 @@ static const uint qt_meta_data_ConvertGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -59,14 +55,12 @@ static const uint qt_meta_data_ConvertGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x08 /* Private */,
-       3,    0,   30,    2, 0x08 /* Private */,
-       4,    1,   31,    2, 0x08 /* Private */,
+       1,    0,   24,    2, 0x08 /* Private */,
+       3,    0,   25,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 5,    6,
 
        0        // eod
 };
@@ -77,23 +71,12 @@ void ConvertGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         ConvertGui *_t = static_cast<ConvertGui *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->convertFiles(); break;
-        case 1: _t->clearPaths(); break;
-        case 2: _t->useFileExplorer((*reinterpret_cast< QLineEdit*(*)>(_a[1]))); break;
+        case 0: _t->clearPaths(); break;
+        case 1: _t->clearLineEdits(); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLineEdit* >(); break;
-            }
-            break;
-        }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject ConvertGui::staticMetaObject = {
@@ -121,13 +104,13 @@ int ConvertGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        if (_id < 2)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 2;
     }
     return _id;
 }
