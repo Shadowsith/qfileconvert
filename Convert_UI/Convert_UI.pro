@@ -26,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         convertgui.cpp \
-    converter.cpp
+    converter.cpp \
+    aboutwindow.cpp
 
 HEADERS += \
         convertgui.h \
-    converter.h
+    converter.h \
+    aboutwindow.h
 
 FORMS += \
         convertgui.ui \
-    about.ui
+    aboutwindow.ui

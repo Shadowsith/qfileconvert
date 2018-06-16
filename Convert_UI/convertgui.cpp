@@ -1,5 +1,6 @@
 #include <convertgui.h>
 #include <ui_convertgui.h>
+#include <ui_aboutwindow.h>
 #include <converter.h>
 #include <qdesktopservices.h>
 #include <qfiledialog.h>
@@ -9,48 +10,34 @@
 #include <qdir.h>
 #include <qurl.h>
 #include <qpushbutton.h>
+#include <qmetaobject.h>
 #include <qobject.h>
 #include <string>
+#include <qmenu.h>
+#include <qaction.h>
+#include <QApplication>
 
 ConvertGui::ConvertGui(QWidget *parent) : QMainWindow(parent), ui(new Ui::ConvertGui)
 {
     ui->setupUi(this);
-    //connect(ui->convBt, SIGNAL(clicked()), SLOT());
-    connect(ui->clearBtn, SIGNAL(clicked()), SLOT(clearLineEdits()));
-    /*
-    connect(ui->convBt, &QPushButton::clicked, [=] {
-        QMessageBox msg;
-        msg.setText("click");
-        msg.show();
-        //clearPaths();
-    });
+
     connect(ui->clearBtn, &QPushButton::clicked, [=] {
-        QMessageBox msg;
-        msg.setText("click");
-        msg.show();
-        clearLineEdits();
+         clearLineEdits();
     });
-    */
     connect(ui->btnPicFrom, &QPushButton::clicked, [=] {
         useFileExplorer(ui->txtPicFrom);
     });
     connect(ui->btnPicTo, &QPushButton::clicked, [=] {
         useFileExplorer(ui->txtPicTo);
     });
+    connect(ui->menuAbout, &QMenu::aboutToShow, [=] {
+        openAboutWindow();
+    });
 }
 
 ConvertGui::~ConvertGui()
 {
     delete ui;
-}
-
-void ConvertGui::clearPaths() {
-    ui->txtPicFrom->setText("");
-    ui->txtPicTo->setText("");
-    //QMessageBox box;
-    //box.setText(QTabWidget::currentIndex(0));
-    //box.setText(ui->path1->text());
-    //box.exec();
 }
 
 void ConvertGui::convertFiles(){
@@ -70,5 +57,10 @@ void ConvertGui::clearLineEdits(){
     for(auto const& value : lineEdits) {
        value->setText("");
     }
+}
+
+void ConvertGui::openAboutWindow() {
+    aW = new AboutWindow();
+    aW->show();
 }
 
