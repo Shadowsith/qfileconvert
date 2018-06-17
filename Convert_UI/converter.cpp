@@ -24,6 +24,10 @@ Converter::~Converter() {
     //delete this;
 }
 
+std::string Converter::getInputFlType() {
+    return m_inputFlType;
+}
+
 bool Converter::fileExists(const std::string& filePath) {
     struct stat buffer;
     return (stat (filePath.c_str(), &buffer) == 0); 
@@ -42,44 +46,59 @@ std::string Converter::getFileExtension(const std::string& filePath) {
     return result;
 }
 
-int Converter::convertImg(const std::string& input, std::string& output) {
+std::string Converter::convertImg(const std::string input, std::string output) {
     std::regex re(m_imgPattern);
     if (fileExists(input)) {
         if(std::regex_search(getFileExtension(input), re)) {
-            if (m_pid = fork()) {
-                waitpid(m_pid, &m_status, 0);
+            if (getFileExtension(input).find(m_inputFlType) != std::string::npos) {
+                if (m_pid = fork()) {
+                    waitpid(m_pid, &m_status, 0);
+                } else {
+                    if (output.empty() || output == "") {
+                        std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
+                        execl(m_exec_convert, m_exec_convert, input.c_str(), emptyOut.c_str(), NULL);
+                    } else {
+                        execl(m_exec_convert, m_exec_convert, input.c_str(), output.c_str(), NULL);
+                    }
+                }
+                return m_msgSuccess;
             } else {
-                execl(m_exec_convert, m_exec_convert, input.c_str(), output.c_str(), NULL);
+                return m_msgNotFileType + m_inputFlType;
             }
-            return 0;
-        } else 
-            return 1;
-    } else 
-        return 1;
+        } else {
+            return m_msgFailure;
+        }
+    } else { 
+        return m_msgFileNotExists;
+    }
 }
 
-int Converter::convertVid(const std::string& input, std::string& output) {
+std::string Converter::convertAudio(const std::string input, std::string output) {
+   return ""; 
+}
+
+std::string Converter::convertVid(const std::string input, std::string output) {
     if (fileExists(input)) {
         if (m_pid == fork()) {
             waitpid(m_pid, &m_status, 0);
         } else {
             execl(m_exec_ffmpeg, m_exec_ffmpeg, input.c_str(), output.c_str(), NULL);
         }
-        return m_status;
+        return m_msgSuccess;
     } else {
-        return 1;
+        return m_msgFileNotExists;
     }
 }
 
-int Converter::convertText(const std::string& input, std::string& output) {
+std::string Converter::convertText(const std::string input, std::string output) {
     if (fileExists(input)) {
         if (m_pid == fork()) {
             waitpid(m_pid, &m_status, 0);
         } else {
-            execl(m_exec_libreoffice, m_exec_libreoffice, input.c_str(), output.c_str(), NULL);
+            execl(m_exec_unoconv, m_exec_unoconv, input.c_str(), output.c_str(), NULL);
         }
-        return m_status;
+        return m_msgSuccess;
     } else {
-        return 1;
+        return m_msgFileNotExists;
     }
 }

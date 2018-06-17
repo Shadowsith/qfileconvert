@@ -23,17 +23,21 @@ ConvertGui::ConvertGui(QWidget *parent) : QMainWindow(parent), ui(new Ui::Conver
 {
     ui->setupUi(this);
 
-    connect(ui->convBt, &QPushButton::clicked, [=] {
+    connect(ui->btnCloseGui, &QPushButton::clicked, [=] {
+        close();
+        delete ui;
+    });
+    connect(ui->btnConvert, &QPushButton::clicked, [=] {
         convertFiles();
     });
-    connect(ui->clearBtn, &QPushButton::clicked, [=] {
+    connect(ui->btnClearInput, &QPushButton::clicked, [=] {
          clearLineEdits();
     });
-    connect(ui->btnPicFrom, &QPushButton::clicked, [=] {
-        useFileExplorer(ui->txtPicFrom);
+    connect(ui->btnImgFrom, &QPushButton::clicked, [=] {
+        useFileExplorer(ui->txtImgFrom);
     });
-    connect(ui->btnPicTo, &QPushButton::clicked, [=] {
-        useFileExplorer(ui->txtPicTo);
+    connect(ui->btnImgTo, &QPushButton::clicked, [=] {
+        useFileExplorer(ui->txtImgTo);
     });
     connect(ui->menuAbout, &QMenu::aboutToShow, [=] {
         openAboutWindow();
@@ -46,18 +50,30 @@ ConvertGui::~ConvertGui()
 }
 
 void ConvertGui::convertFiles(){
-    Converter conv(ui->cmbPicFrom->currentText().toStdString(),
-                         ui->cmbPicFrom->currentText().toStdString());
-
-    const std::string txtPicF = ui->txtPicFrom->text().toStdString();
-    std::string txtPicT = ui->txtPicTo->text().toStdString();
-
-    int num = conv.convertImg(txtPicF, txtPicT);
-
     QMessageBox msg;
-    msg.setText(QString::fromStdString(std::to_string(num)) + " " +
-                QString::fromStdString(conv.getFileExtension(txtPicF)));
-    msg.exec();
+    std::string debugCmd = "";
+    std::string convMsg = "";
+
+    switch(ui->tabWidget->currentIndex()) {
+        case 0: {
+            Converter conv(ui->cmbImgFrom->currentText().toStdString(),
+                             ui->cmbImgTo->currentText().toStdString());
+
+            debugCmd = conv.getFileExtension(ui->txtImgFrom->text().toStdString());
+
+            convMsg = conv.convertImg(ui->txtImgFrom->text().toStdString(),
+                                               ui->txtImgTo->text().toStdString());
+        } break;
+        case 1: {
+
+        } break;
+        case 2: {} break;
+        case 3: {} break;
+        default: break;
+    }
+        msg.setText(QString::fromStdString(convMsg) + " " + QString::fromStdString(debugCmd));
+        msg.exec();
+
 
 }
 
