@@ -34,10 +34,16 @@ ConvertGui::ConvertGui(QWidget *parent) : QMainWindow(parent), ui(new Ui::Conver
          clearLineEdits();
     });
     connect(ui->btnImgFrom, &QPushButton::clicked, [=] {
-        useFileExplorer(ui->txtImgFrom);
+        useFileExplorer(ui->txtImgFrom, FileType::IMAGE, Target::SOURCE);
     });
     connect(ui->btnImgTo, &QPushButton::clicked, [=] {
-        useFileExplorer(ui->txtImgTo);
+        useFileExplorer(ui->txtImgTo, FileType::IMAGE, Target::DEST);
+    });
+    connect(ui->btnAudFrom, &QPushButton::clicked, [=] {
+        useFileExplorer(ui->txtAudFrom, FileType::AUIDO, Target::SOURCE);
+    });
+    connect(ui->btnAudTo, &QPushButton::clicked, [=] {
+        useFileExplorer(ui->txtAudTo, FileType::AUIDO, Target::DEST);
     });
     connect(ui->menuAbout, &QMenu::aboutToShow, [=] {
         openAboutWindow();
@@ -62,9 +68,15 @@ void ConvertGui::convertFiles(){
             debugCmd = conv.getFileExtension(ui->txtImgFrom->text().toStdString());
 
             convMsg = conv.convertImg(ui->txtImgFrom->text().toStdString(),
-                                               ui->txtImgTo->text().toStdString());
+                                      ui->txtImgTo->text().toStdString());
         } break;
         case 1: {
+            Converter conv(ui->cmbAudFrom->currentText().toStdString(),
+                           ui->cmbImgTo->currentText().toStdString());
+
+            debugCmd = conv.getFileExtension(ui->txtAudFrom->text().toStdString());
+            convMsg = conv.convertAudio(ui->txtAudFrom->text().toStdString(),
+                                        ui->txtAudFrom->text().toStdString());
 
         } break;
         case 2: {} break;
@@ -77,8 +89,46 @@ void ConvertGui::convertFiles(){
 
 }
 
-void ConvertGui::useFileExplorer(QLineEdit* le){
-    QString path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip", tr("Image Files (*.png *.jpg *.bmp)"));
+void ConvertGui::useFileExplorer(QLineEdit* le, FileType search, Target target){
+    QString path;
+    QString type;
+    switch(search) {
+    case FileType::IMAGE: {
+        if (target == Target::SOURCE) {
+            type = ui->cmbImgFrom->currentText();
+            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                                            type + " Files ( *." + type.toLower() + " )");
+        } else {
+            type = ui->cmbImgTo->currentText();
+            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                                            type + " Files ( *." + type.toLower() + " )");
+        }
+    } break;
+    case FileType::AUIDO: {
+        if (target == Target::SOURCE) {
+            type = ui->cmbAudFrom->currentText();
+            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                                            type + " Files ( *." + type.toLower() + " )");
+        } else {
+            type = ui->cmbAudTo->currentText();
+            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                                            type + " Files ( *." + type.toLower() + " )");
+        }
+
+    } break;
+    case FileType::VIDEO: {
+
+    } break;
+    case FileType::AUDIO_VIDEO: {
+
+    } break;
+    case FileType::TEXT: {
+
+    }
+    default: break;
+
+    }
+
     le->insert(path);
 }
 

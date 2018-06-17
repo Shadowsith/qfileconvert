@@ -13,17 +13,17 @@ private:
     std::string m_inputFlType;
     std::string m_outputFlType;
     std::string m_iEnd;
-    const std::string m_imgPattern = "BMP|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|THM|TIF|TIFF|YUV";
-    const std::string m_audioPattern = "AIF|FLAC|IFF|M3U|M4A|MID|MP3|MPA|WAV|WMA";
-    const std::string m_vidPattern = "3G2|3GP|ASF|AVI|FLV|M4V|MOV|MP4|MPG|RM|SRT|SWF|VOB|WMV";
-    const std::string m_txtPattern = "DOC|DOCX|LOG|MSG|ODT|PAGES|RTF|TEX|TXT|WPD|WPS"; 
-    const std::string m_fileCmd = "file -b "; 
+    std::string m_imgPattern = "BMP|bitmap|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|THM|TIF|TIFF|YUV";
+    std::string m_audioPattern = "AIF|FLAC|IFF|M3U|M4A|MID|MP3|MPA|WAV|WMA";
+    std::string m_vidPattern = "3G2|3GP|ASF|AVI|FLV|M4V|MOV|MP4|MPG|RM|SRT|SWF|VOB|WMV";
+    std::string m_txtPattern = "DOC|DOCX|LOG|MSG|ODT|PAGES|RTF|TEX|TXT|WPD|WPS"; 
+    const std::string m_fileCmd = "file "; 
     const std::string m_msgSuccess = "File was sucessfully converted!";
     const std::string m_msgFileNotExists = "The file does not exist!";
     const std::string m_msgFailure = "File can't be converted";
     const std::string m_msgNotFileType = "Input file has not the file type "; 
-    const char* m_exec_convert = "/usr/bin/convert";
-    const char* m_exec_ffmpeg = "/usr/bin/ffmpeg";
+    const std::string m_exec_convert = "/usr/bin/convert";
+    const std::string m_exec_ffmpeg = "/usr/bin/ffmpeg";
     const char* m_exec_unoconv = "/usr/bin/unoconv";
 
     bool fileExists(const std::string& filePath);
