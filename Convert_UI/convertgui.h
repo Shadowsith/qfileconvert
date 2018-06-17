@@ -6,6 +6,7 @@
 #include <qpushbutton.h>
 #include <qwindow.h>
 #include <aboutwindow.h>
+#include <converter.h>
 #include <vector>
 
 namespace Ui {

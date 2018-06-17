@@ -3,9 +3,11 @@
 #include <ui_aboutwindow.h>
 #include <converter.h>
 #include <qdesktopservices.h>
+#include <qstring.h>
 #include <qfiledialog.h>
 #include <qtabwidget.h>
 #include <qmessagebox.h>
+#include <qcombobox.h>
 #include <qlineedit.h>
 #include <qdir.h>
 #include <qurl.h>
@@ -21,6 +23,9 @@ ConvertGui::ConvertGui(QWidget *parent) : QMainWindow(parent), ui(new Ui::Conver
 {
     ui->setupUi(this);
 
+    connect(ui->convBt, &QPushButton::clicked, [=] {
+        convertFiles();
+    });
     connect(ui->clearBtn, &QPushButton::clicked, [=] {
          clearLineEdits();
     });
@@ -41,6 +46,18 @@ ConvertGui::~ConvertGui()
 }
 
 void ConvertGui::convertFiles(){
+    Converter conv(ui->cmbPicFrom->currentText().toStdString(),
+                         ui->cmbPicFrom->currentText().toStdString());
+
+    const std::string txtPicF = ui->txtPicFrom->text().toStdString();
+    std::string txtPicT = ui->txtPicTo->text().toStdString();
+
+    int num = conv.convertImg(txtPicF, txtPicT);
+
+    QMessageBox msg;
+    msg.setText(QString::fromStdString(std::to_string(num)) + " " +
+                QString::fromStdString(conv.getFileExtension(txtPicF)));
+    msg.exec();
 
 }
 

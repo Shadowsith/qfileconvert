@@ -9,6 +9,7 @@ AboutWindow::AboutWindow(QWidget *parent) : QWidget(parent), win(new Ui::AboutWi
     win->setupUi(this);
     connect(win->btnCloseAw, &QPushButton::clicked, [=] {
         close();
+        delete win;
     });
 }
 
