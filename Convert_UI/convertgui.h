@@ -40,6 +40,7 @@ private:
 
     void clearLineEdits();
     void openAboutWindow();
+    bool checkPathes(QString source, QString dest);
 
 public:
     explicit ConvertGui(QWidget *parent = 0);

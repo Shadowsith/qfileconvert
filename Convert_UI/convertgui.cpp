@@ -55,6 +55,13 @@ ConvertGui::~ConvertGui()
     delete ui;
 }
 
+bool ConvertGui::checkPathes(QString source, QString dest) {
+    if (source != dest)
+        return true;
+    else
+        return false;
+}
+
 void ConvertGui::convertFiles(){
     QMessageBox msg;
     std::string debugCmd = "";
@@ -67,16 +74,25 @@ void ConvertGui::convertFiles(){
 
             debugCmd = conv.getFileExtension(ui->txtImgFrom->text().toStdString());
 
+            if(checkPathes(ui->txtImgFrom->text(), ui->txtImgTo->text())) {
             convMsg = conv.convertImg(ui->txtImgFrom->text().toStdString(),
                                       ui->txtImgTo->text().toStdString());
+            } else {
+                convMsg = "In- and output files can not have the same path!";
+            }
         } break;
         case 1: {
             Converter conv(ui->cmbAudFrom->currentText().toStdString(),
                            ui->cmbImgTo->currentText().toStdString());
 
             debugCmd = conv.getFileExtension(ui->txtAudFrom->text().toStdString());
+
+            if(checkPathes(ui->txtAudFrom->text(), ui->txtAudTo->text())) {
             convMsg = conv.convertAudio(ui->txtAudFrom->text().toStdString(),
-                                        ui->txtAudFrom->text().toStdString());
+                                        ui->txtAudTo->text().toStdString());
+            } else {
+                convMsg = "In- and output files can not have the same path!";
+            }
 
         } break;
         case 2: {} break;

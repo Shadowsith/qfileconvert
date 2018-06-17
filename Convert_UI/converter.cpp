@@ -87,12 +87,12 @@ std::string Converter::convertAudio(const std::string input, std::string output)
             if (m_pid = fork()) {
                 waitpid(m_pid, &m_status, 0);
             } else {
-                const std::string ffmpeg = m_exec_ffmpeg + " -i"; 
+                const std::string ffmpeg = "ffmpeg -i"; 
                 if (output.empty() || output == "") {
                     std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
-                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), input.c_str(), emptyOut.c_str(), NULL);
+                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), emptyOut.c_str(), NULL);
                 } else {
-                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), input.c_str(), output.c_str(), NULL);
+                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), output.c_str(), NULL);
                 }
             }
             return m_msgSuccess;

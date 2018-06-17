@@ -46,14 +46,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
-      <width>671</width>
+      <width>681</width>
       <height>191</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tabImg">
      <property name="enabled">
@@ -65,7 +65,7 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>30</y>
         <width>561</width>
         <height>91</height>
@@ -247,7 +247,7 @@
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>30</y>
         <width>561</width>
         <height>91</height>
@@ -409,7 +409,7 @@
      <widget class="QWidget" name="layoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>30</y>
         <width>561</width>
         <height>91</height>
@@ -420,14 +420,14 @@
         <number>6</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="lblImgFrom_3">
+        <widget class="QLabel" name="lblVidFrom">
          <property name="text">
           <string>From:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="cmbImgFrom_3">
+        <widget class="QComboBox" name="cmbVidFrom">
          <item>
           <property name="text">
            <string>3G2</string>
@@ -501,24 +501,24 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QLineEdit" name="txtImgFrom_3"/>
+        <widget class="QLineEdit" name="txtVidFrom"/>
        </item>
        <item row="0" column="3">
-        <widget class="QPushButton" name="btnImgFrom_3">
+        <widget class="QPushButton" name="btnVidFrom">
          <property name="text">
           <string>...</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="lblImgTo_3">
+        <widget class="QLabel" name="lblVidTo">
          <property name="text">
           <string>To:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="cmbImgTo_3">
+        <widget class="QComboBox" name="cmbVidTo">
          <item>
           <property name="text">
            <string>3G2</string>
@@ -637,10 +637,10 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="txtImgTo_3"/>
+        <widget class="QLineEdit" name="txtVidTo"/>
        </item>
        <item row="1" column="3">
-        <widget class="QPushButton" name="btnImgTo_3">
+        <widget class="QPushButton" name="btnVidTo">
          <property name="text">
           <string>...</string>
          </property>
@@ -656,7 +656,7 @@
      <widget class="QWidget" name="layoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>30</y>
         <width>561</width>
         <height>91</height>
@@ -667,14 +667,14 @@
         <number>6</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="lblImgFrom_2">
+        <widget class="QLabel" name="lblTxtFrom_2">
          <property name="text">
           <string>From:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="cmbImgFrom_2">
+        <widget class="QComboBox" name="cmbTxtFrom">
          <item>
           <property name="text">
            <string>DOC</string>
@@ -738,24 +738,24 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QLineEdit" name="txtImgFrom_2"/>
+        <widget class="QLineEdit" name="txtTxtFrom"/>
        </item>
        <item row="0" column="3">
-        <widget class="QPushButton" name="btnImgFrom_2">
+        <widget class="QPushButton" name="btnTxtFrom">
          <property name="text">
           <string>...</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="lblImgTo_2">
+        <widget class="QLabel" name="lblTxtTo">
          <property name="text">
           <string>To:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="cmbImgTo_2">
+        <widget class="QComboBox" name="cmbTxtTo">
          <item>
           <property name="text">
            <string>DOC</string>
@@ -819,10 +819,10 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="txtImgTo_2"/>
+        <widget class="QLineEdit" name="txtTxtTo"/>
        </item>
        <item row="1" column="3">
-        <widget class="QPushButton" name="btnImgTo_2">
+        <widget class="QPushButton" name="btnTxtTo">
          <property name="text">
           <string>...</string>
          </property>
