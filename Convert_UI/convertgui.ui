@@ -126,22 +126,12 @@
          </item>
          <item>
           <property name="text">
-           <string>THM</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>TIF</string>
           </property>
          </item>
          <item>
           <property name="text">
            <string>TIFF</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>YUV</string>
           </property>
          </item>
         </widget>
@@ -207,22 +197,12 @@
          </item>
          <item>
           <property name="text">
-           <string>THM</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>TIF</string>
           </property>
          </item>
          <item>
           <property name="text">
            <string>TIFF</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>YUV</string>
           </property>
          </item>
         </widget>
@@ -278,22 +258,7 @@
          </item>
          <item>
           <property name="text">
-           <string>IFF</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>M3U</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>M4A</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>MID</string>
           </property>
          </item>
          <item>
@@ -349,22 +314,7 @@
          </item>
          <item>
           <property name="text">
-           <string>IFF</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>M3U</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>M4A</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>MID</string>
           </property>
          </item>
          <item>
@@ -687,22 +637,7 @@
          </item>
          <item>
           <property name="text">
-           <string>LOG</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>MSG</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>ODT</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>PAGES</string>
           </property>
          </item>
          <item>
@@ -717,7 +652,7 @@
          </item>
          <item>
           <property name="text">
-           <string>TEX</string>
+           <string>SDW</string>
           </property>
          </item>
          <item>
@@ -727,12 +662,7 @@
          </item>
          <item>
           <property name="text">
-           <string>WPD</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>WPS</string>
+           <string>XML</string>
           </property>
          </item>
         </widget>
@@ -768,16 +698,6 @@
          </item>
          <item>
           <property name="text">
-           <string>LOG</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>MSG</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>ODT</string>
           </property>
          </item>
@@ -794,11 +714,6 @@
          <item>
           <property name="text">
            <string>RTF</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>TEX</string>
           </property>
          </item>
          <item>

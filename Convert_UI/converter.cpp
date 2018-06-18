@@ -16,9 +16,28 @@
 Converter::Converter() {}
 
 Converter::Converter(std::string iFileType, std::string oFileType) {
-    if (iFileType == "BMP") {
-        m_inputFlType = "bitmap";
-    }
+    // Image
+    if (iFileType == "BMP") m_inputFlType = "bitmap";
+    if (iFileType == "DDS") m_inputFlType = "DirectDraw Surface"; 
+    if (iFileType == "PSD") m_inputFlType = "Adobe Photoshop Image"; 
+    if (iFileType == "TGA") m_inputFlType = "Targa image data"; 
+    if (iFileType == "TIF") m_inputFlType = "TIFF"; 
+
+    // Audio
+    if (iFileType == "MP3") m_inputFlType = "Audio file with ID3"; 
+    if (iFileType == "MPA") m_inputFlType = "MPEG"; 
+    if (iFileType == "WAV") m_inputFlType = "WAVE"; 
+    if (iFileType == "WMA") m_inputFlType = "ASF"; 
+
+    // Video
+
+    // Text
+    if (iFileType == "DOCX") m_inputFlType = "Microsoft Word";
+    if (iFileType == "DOC") m_inputFlType = "Composite Document File"; 
+    if (iFileType == "ODT") m_inputFlType = "OpenDocument Text";
+    if (iFileType == "TXT") m_inputFlType = "text";
+
+    m_outputFlType = oFileType; 
 }
 
 Converter::~Converter() {

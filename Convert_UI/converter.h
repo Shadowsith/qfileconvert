@@ -13,10 +13,10 @@ private:
     std::string m_inputFlType;
     std::string m_outputFlType;
     std::string m_iEnd;
-    std::string m_imgPattern = "BMP|bitmap|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|THM|TIF|TIFF|YUV";
-    std::string m_audioPattern = "AIF|FLAC|IFF|M3U|M4A|MID|MP3|MPA|WAV|WMA";
+    std::string m_imgPattern = "BMP|bitmap|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|TIF|TIFF";
+    std::string m_audioPattern = "AIF|FLAC|M4A|MP3|MPA|WAV|WMA";
     std::string m_vidPattern = "3G2|3GP|ASF|AVI|FLV|M4V|MOV|MP4|MPG|RM|SRT|SWF|VOB|WMV";
-    std::string m_txtPattern = "DOC|DOCX|LOG|MSG|ODT|PAGES|RTF|TEX|TXT|WPD|WPS"; 
+    std::string m_txtPattern = "DOC|DOCX|ODT|PAGES|RTF|TXT|WPD|WPS|text"; 
     const std::string m_fileCmd = "file "; 
     const std::string m_msgSuccess = "File was sucessfully converted!";
     const std::string m_msgFileNotExists = "The file does not exist!";
