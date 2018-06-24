@@ -49,6 +49,7 @@ public:
     void useFileExplorer(QLineEdit* le, FileType search, Target target);
     void convertFiles();
     void getLineEdits();
+    void checkRequirements();
 
 };
 

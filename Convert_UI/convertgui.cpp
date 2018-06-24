@@ -66,6 +66,8 @@ void ConvertGui::convertFiles(){
     QMessageBox msg;
     std::string debugCmd = "";
     std::string convMsg = "";
+    std::string inOutEqual = "In- and output files can not have the same path!";
+    std::string inEmpty = "Input filepath could not be empty!";
 
     switch(ui->tabWidget->currentIndex()) {
         case 0: {
@@ -74,11 +76,14 @@ void ConvertGui::convertFiles(){
 
             debugCmd = conv.getFileExtension(ui->txtImgFrom->text().toStdString());
 
-            if(checkPathes(ui->txtImgFrom->text(), ui->txtImgTo->text())) {
+            if (ui->txtImgFrom->text() == "") {
+                convMsg = inEmpty;
+            }
+            else if(checkPathes(ui->txtImgFrom->text(), ui->txtImgTo->text())) {
             convMsg = conv.convertImg(ui->txtImgFrom->text().toStdString(),
                                       ui->txtImgTo->text().toStdString());
             } else {
-                convMsg = "In- and output files can not have the same path!";
+                convMsg = inOutEqual;
             }
         } break;
         case 1: {
@@ -87,11 +92,14 @@ void ConvertGui::convertFiles(){
 
             debugCmd = conv.getFileExtension(ui->txtAudFrom->text().toStdString());
 
-            if(checkPathes(ui->txtAudFrom->text(), ui->txtAudTo->text())) {
+            if(ui->txtAudFrom->text() == "") {
+                convMsg = inEmpty;
+            }
+            else if(checkPathes(ui->txtAudFrom->text(), ui->txtAudTo->text())) {
             convMsg = conv.convertAudio(ui->txtAudFrom->text().toStdString(),
                                         ui->txtAudTo->text().toStdString());
             } else {
-                convMsg = "In- and output files can not have the same path!";
+                convMsg = inOutEqual;
             }
 
         } break;
@@ -109,29 +117,29 @@ void ConvertGui::useFileExplorer(QLineEdit* le, FileType search, Target target){
     QString path;
     QString type;
     switch(search) {
-    case FileType::IMAGE: {
-        if (target == Target::SOURCE) {
-            type = ui->cmbImgFrom->currentText();
-            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+        case FileType::IMAGE: {
+            if (target == Target::SOURCE) {
+                type = ui->cmbImgFrom->currentText();
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
                                             type + " Files ( *." + type.toLower() + " )");
-        } else {
-            type = ui->cmbImgTo->currentText();
-            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+            } else {
+                type = ui->cmbImgTo->currentText();
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
                                             type + " Files ( *." + type.toLower() + " )");
-        }
-    } break;
-    case FileType::AUIDO: {
-        if (target == Target::SOURCE) {
-            type = ui->cmbAudFrom->currentText();
-            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+            }
+        } break;
+        case FileType::AUIDO: {
+            if (target == Target::SOURCE) {
+                type = ui->cmbAudFrom->currentText();
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
                                             type + " Files ( *." + type.toLower() + " )");
-        } else {
-            type = ui->cmbAudTo->currentText();
-            path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+            } else {
+                type = ui->cmbAudTo->currentText();
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
                                             type + " Files ( *." + type.toLower() + " )");
-        }
+            }
 
-    } break;
+        } break;
     case FileType::VIDEO: {
 
     } break;
@@ -146,6 +154,31 @@ void ConvertGui::useFileExplorer(QLineEdit* le, FileType search, Target target){
     }
 
     le->insert(path);
+}
+
+void ConvertGui::checkRequirements() {
+    Converter conv;
+    std::string which;
+    #ifdef __linux
+    which = "/usr/bin/which ";
+    #endif
+    if (conv.checkProgram(which + "convert")) {
+        ui->tabImg->setEnabled(true);
+    } else {
+        ui->tabImg->setDisabled(true);
+    }
+    if (conv.checkProgram(which + "ffmpeg")) {
+        ui->tabAudio->setEnabled(true);
+        ui->tabAudio->setEnabled(true);
+    } else {
+        ui->tabAudio->setDisabled(true);
+        ui->tabVideo->setDisabled(true);
+    }
+    if (conv.checkProgram(which + "unoconv")) {
+        ui->tabText->setEnabled(true);
+    } else {
+        ui->tabText->setDisabled(true);
+    }
 }
 
 void ConvertGui::getLineEdits(){
