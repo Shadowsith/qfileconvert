@@ -12,6 +12,7 @@
 #include <array>
 #include <regex>
 #include "converter.h"
+#include "String.h"
 
 Converter::Converter() {}
 
@@ -38,11 +39,13 @@ Converter::Converter(std::string iFileType, std::string oFileType) {
     if (iFileType == "TXT") m_inputFlType = "text";
 
     m_outputFlType = oFileType; 
+    m_imgFileExt = m_imgFileExt + "|" + String::toLower(m_imgFileExt); 
+    m_audFileExt = m_audFileExt + "|" + String::toLower(m_audFileExt); 
 }
 
-Converter::~Converter() {
-    //delete this;
-}
+Converter::~Converter() {}
+
+// private methods
 
 std::string Converter::getInputFlType() {
     return m_inputFlType;
@@ -69,6 +72,38 @@ bool Converter::fileExists(const std::string& filePath) {
     return (stat (filePath.c_str(), &buffer) == 0); 
 }
 
+bool Converter::checkFileExtension(const std::string& output, FileType type) {
+    std::string ext = output.substr(output.rfind(".")+1,output.length()-1); 
+
+    switch(type) {
+        case FileType::IMAGE: {
+            std::regex re(m_imgFileExt);
+            if(std::regex_search(ext,re)) {
+                return true;
+            } else {
+                return false;
+            }
+        } break;
+        case FileType::AUIDO: {
+            std::regex re(m_audFileExt);
+            if(std::regex_search(ext,re)) {
+                return true;
+            } else {
+                return false;
+            }
+        } break;
+        case FileType::AUDIO_VIDEO: {
+
+        } break;
+        case FileType::TEXT: {
+
+        } break;
+    }
+     
+}
+
+// public methods
+
 std::string Converter::getFileExtension(const std::string& filePath) {
     std::string cmd = m_fileCmd + filePath; 
     std::array<char, 128> buffer;
@@ -85,26 +120,30 @@ std::string Converter::getFileExtension(const std::string& filePath) {
 std::string Converter::convertImg(const std::string input, std::string output) {
     std::regex re(m_imgPattern);
     if (fileExists(input)) {
-        if(std::regex_search(getFileExtension(input), re)) {
-            if (getFileExtension(input).find(m_inputFlType) != std::string::npos) {
-                if (m_pid = fork()) {
-                    waitpid(m_pid, &m_status, 0);
-                } else {
-                    if (output.empty() || output == "") {
-                        std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
-                        execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
-                                input.c_str(), emptyOut.c_str(), NULL);
+        if(!fileExists(output)) {
+            if(std::regex_search(getFileExtension(input), re)) {
+                if (getFileExtension(input).find(m_inputFlType) != std::string::npos) {
+                    if (m_pid = fork()) {
+                        waitpid(m_pid, &m_status, 0);
                     } else {
-                        execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
-                                input.c_str(), output.c_str(), NULL);
+                        if (output.empty() || output == "") {
+                            std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
+                            execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
+                                    input.c_str(), emptyOut.c_str(), NULL);
+                        } else {
+                            execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
+                                    input.c_str(), output.c_str(), NULL);
+                        }
                     }
+                    return m_msgSuccess;
+                } else {
+                    return m_msgNotFileType + m_inputFlType;
                 }
-                return m_msgSuccess;
             } else {
-                return m_msgNotFileType + m_inputFlType;
+                return m_msgFailure;
             }
         } else {
-            return m_msgFailure;
+            return m_msgOutFileExists;
         }
     } else { 
         return m_msgFileNotExists;
@@ -113,32 +152,30 @@ std::string Converter::convertImg(const std::string input, std::string output) {
 
 std::string Converter::convertAudio(const std::string input, std::string output) {
     std::regex re(m_audioPattern);
-    std::transform(m_audioPattern.begin(), m_audioPattern.end(),
-            m_audioPattern.begin(), ::tolower); 
-    std::regex re2(m_audioPattern);
+    //std::transform(m_audioPattern.begin(), m_audioPattern.end(),
+    //        m_audioPattern.begin(), ::tolower); 
+    //std::regex re2(m_audioPattern);
     if (fileExists(input)) {
         if(!fileExists(output)) {
-        if(std::regex_search(getFileExtension(input), re) ||
-                std::regex_search(getFileExtension(input), re2)) {
-            if (m_pid = fork()) {
-                waitpid(m_pid, &m_status, 0);
-            } else {
-                const std::string ffmpeg = "ffmpeg -i"; 
-                if (output.empty() || output == "") {
-                    std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
-                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), emptyOut.c_str(), NULL);
+            if(std::regex_search(getFileExtension(input), re)) {
+                if (m_pid = fork()) {
+                    waitpid(m_pid, &m_status, 0);
                 } else {
-                    execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), output.c_str(), NULL);
+                    const std::string ffmpeg = "ffmpeg -i"; 
+                    if (output.empty() || output == "") {
+                        std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
+                        execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), emptyOut.c_str(), NULL);
+                    } else {
+                        execl(m_exec_ffmpeg.c_str(), ffmpeg.c_str(), "-i", input.c_str(), output.c_str(), NULL);
+                    }
                 }
+                return m_msgSuccess;
+            } else {
+                return m_msgNotFileType + m_inputFlType; 
             }
-            return m_msgSuccess;
-        } else {
-            return m_msgNotFileType + m_inputFlType; 
-        }
         } else {
             return m_msgOutFileExists;
         }
-        
     } else {
         return m_msgFileNotExists; 
     }

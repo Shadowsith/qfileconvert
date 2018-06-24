@@ -3,6 +3,13 @@
 
 #include <string>
 
+enum FileType {
+    IMAGE = 0,
+    AUIDO,
+    VIDEO,
+    AUDIO_VIDEO,
+    TEXT
+};
 
 class Converter {
 
@@ -13,8 +20,14 @@ private:
     std::string m_inputFlType;
     std::string m_outputFlType;
     std::string m_iEnd;
+    // common file extensions
+    std::string m_imgFileExt = "BMP|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|TIF|TIFF";
+    std::string m_audFileExt = "AIF|FLAC|M4A|MP3|MPA|WAV|WMA";
+
+    // patterns search output form file command
     std::string m_imgPattern = "BMP|bitmap|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|TIF|TIFF";
-    std::string m_audioPattern = "AIF|FLAC|M4A|MP3|MPA|WAV|WMA";
+    //std::string m_audioPattern = "AIF|FLAC|M4A|MP3|MPA|WAV|WMA";
+    std::string m_audioPattern = "AIF|ASF|FLAC|M4A|Audio file with ID3|MPEG|WAVE";
     std::string m_vidPattern = "3G2|3GP|ASF|AVI|FLV|M4V|MOV|MP4|MPG|RM|SRT|SWF|VOB|WMV";
     std::string m_txtPattern = "DOC|DOCX|ODT|PAGES|RTF|TXT|WPD|WPS|text"; 
     const std::string m_fileCmd = "file "; 
@@ -28,6 +41,7 @@ private:
     const std::string m_exec_unoconv = "/usr/bin/unoconv"; 
 
     bool fileExists(const std::string& filePath);
+    bool checkFileExtension(const std::string& output, FileType type); 
     //std::string getFileExtension(const std::string& filePath); 
 
 public:

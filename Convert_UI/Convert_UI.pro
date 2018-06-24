@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         convertgui.cpp \
     converter.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    String.cpp
 
 HEADERS += \
         convertgui.h \
     converter.h \
-    aboutwindow.h
+    aboutwindow.h \
+    String.h
 
 FORMS += \
         convertgui.ui \

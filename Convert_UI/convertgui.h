@@ -13,14 +13,6 @@ namespace Ui {
 class ConvertGui;
 }
 
-enum FileType {
-    IMAGE = 0,
-    AUIDO,
-    VIDEO,
-    AUDIO_VIDEO,
-    TEXT
-};
-
 enum Target {
     SOURCE = 0,
     DEST
