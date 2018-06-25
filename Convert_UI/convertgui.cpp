@@ -74,7 +74,7 @@ void ConvertGui::convertFiles(){
             Converter conv(ui->cmbImgFrom->currentText().toStdString(),
                              ui->cmbImgTo->currentText().toStdString());
 
-            debugCmd = conv.getFileExtension(ui->txtImgFrom->text().toStdString());
+            debugCmd = conv.getFileType(ui->txtImgFrom->text().toStdString());
 
             if (ui->txtImgFrom->text() == "") {
                 convMsg = inEmpty;
@@ -90,7 +90,7 @@ void ConvertGui::convertFiles(){
             Converter conv(ui->cmbAudFrom->currentText().toStdString(),
                            ui->cmbImgTo->currentText().toStdString());
 
-            debugCmd = conv.getFileExtension(ui->txtAudFrom->text().toStdString());
+            debugCmd = conv.getFileType(ui->txtAudFrom->text().toStdString());
 
             if(ui->txtAudFrom->text() == "") {
                 convMsg = inEmpty;
@@ -105,40 +105,40 @@ void ConvertGui::convertFiles(){
         } break;
         case 2: {} break;
         case 3: {} break;
+        case 4: {} break;
+        case 5: {} break;
         default: break;
     }
         msg.setText(QString::fromStdString(convMsg) + " " + QString::fromStdString(debugCmd));
         msg.exec();
-
-
 }
 
 void ConvertGui::useFileExplorer(QLineEdit* le, FileType search, Target target){
     QString path;
     QString type;
+    QString homePath = QDir::homePath();
     switch(search) {
         case FileType::IMAGE: {
             if (target == Target::SOURCE) {
                 type = ui->cmbImgFrom->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
             } else {
                 type = ui->cmbImgTo->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
             }
         } break;
         case FileType::AUIDO: {
             if (target == Target::SOURCE) {
                 type = ui->cmbAudFrom->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
             } else {
                 type = ui->cmbAudTo->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/philip",
+                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
             }
-
         } break;
     case FileType::VIDEO: {
 
@@ -176,8 +176,12 @@ void ConvertGui::checkRequirements() {
     }
     if (conv.checkProgram(which + "unoconv")) {
         ui->tabText->setEnabled(true);
+        ui->tabData->setEnabled(true);
+        ui->tabPresentation->setEnabled(true);
     } else {
         ui->tabText->setDisabled(true);
+        ui->tabData->setDisabled(true);
+        ui->tabPresentation->setDisabled(true);
     }
 }
 

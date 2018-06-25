@@ -53,7 +53,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabImg">
      <property name="enabled">
@@ -365,7 +365,7 @@
         <height>91</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayoutImg_3">
+      <layout class="QGridLayout" name="gridLayoutVid">
        <property name="spacing">
         <number>6</number>
        </property>
@@ -612,12 +612,12 @@
         <height>91</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayoutImg_2">
+      <layout class="QGridLayout" name="gridLayoutText">
        <property name="spacing">
         <number>6</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="lblTxtFrom_2">
+        <widget class="QLabel" name="lblTxtFrom">
          <property name="text">
           <string>From:</string>
          </property>
@@ -746,6 +746,126 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="tabData">
+     <attribute name="title">
+      <string>Table</string>
+     </attribute>
+     <widget class="QWidget" name="layoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>561</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayoutData">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblDataFrom">
+         <property name="text">
+          <string>From:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="cmbDataFrom"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="txtDataFrom"/>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btnDataFrom">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblDataTo">
+         <property name="text">
+          <string>To:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="cmbDataTo"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="txtDataTo"/>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="btnDataTo">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabPresentation">
+     <attribute name="title">
+      <string>Presentation</string>
+     </attribute>
+     <widget class="QWidget" name="layoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>561</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayoutPres">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblPresFrom">
+         <property name="text">
+          <string>From:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="cmbPresFrom"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="txtPresFrom"/>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btnPresFrom">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblPresTo">
+         <property name="text">
+          <string>To:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="cmbPresTo"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="txtPresTo"/>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="btnPresTo">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
    <widget class="QPushButton" name="btnCloseGui">
     <property name="geometry">
@@ -776,17 +896,23 @@
    <property name="nativeMenuBar">
     <bool>true</bool>
    </property>
-   <widget class="QMenu" name="menuTest">
-    <property name="title">
-     <string>Test</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>Abo&amp;ut</string>
     </property>
    </widget>
-   <addaction name="menuTest"/>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Setti&amp;ngs</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>&amp;Language</string>
+    </property>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuLanguage"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

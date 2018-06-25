@@ -74,7 +74,6 @@ bool Converter::fileExists(const std::string& filePath) {
 
 bool Converter::checkFileExtension(const std::string& output, FileType type) {
     std::string ext = output.substr(output.rfind(".")+1,output.length()-1); 
-
     switch(type) {
         case FileType::IMAGE: {
             std::regex re(m_imgFileExt);
@@ -98,13 +97,42 @@ bool Converter::checkFileExtension(const std::string& output, FileType type) {
         case FileType::TEXT: {
 
         } break;
+        case FileType::DATA: {
+
+        } break;
+        case FileType::PRESENTATION: {
+
+        } break;
+        default: break;
     }
-     
+}
+
+bool Converter::checkIOPaths(const std::string& input, const std::string& output, const std::regex& re) {
+    if(fileExists(input)) {
+        if(!fileExists(output)) {
+            if(std::regex_search(getFileType(input), re)) {
+                if (getFileType(input).find(m_inputFlType) != std::string::npos) {
+                    return true; 
+                } else {
+                    m_errMsg = m_msgNotFileType + m_inputFlType;
+                    return false;
+                }
+            } else {
+                m_errMsg = m_msgFailure; 
+            }
+        } else {
+            m_errMsg = m_msgOutFileExists; 
+            return false;
+        }
+    } else {
+        m_errMsg = m_msgFileNotExists; 
+        return false;
+    }
 }
 
 // public methods
 
-std::string Converter::getFileExtension(const std::string& filePath) {
+std::string Converter::getFileType(const std::string& filePath) {
     std::string cmd = m_fileCmd + filePath; 
     std::array<char, 128> buffer;
     std::string result;
@@ -119,15 +147,38 @@ std::string Converter::getFileExtension(const std::string& filePath) {
 
 std::string Converter::convertImg(const std::string input, std::string output) {
     std::regex re(m_imgPattern);
+    if(checkIOPaths(input, output, re)) {
+        if (m_pid = fork()) {
+            waitpid(m_pid, &m_status, 0);
+        } else {
+            if (output.empty() || output == "") {
+                std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + 
+                    String::toLower(m_outputFlType); 
+                execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
+                        input.c_str(), emptyOut.c_str(), NULL);
+            } else {
+                execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
+                        input.c_str(), output.c_str(), NULL);
+            }
+        }
+        return m_msgSuccess;
+    } else {
+        return m_errMsg; 
+    }
+}
+/*
+std::string Converter::convertImg(const std::string input, std::string output) {
+    std::regex re(m_imgPattern);
     if (fileExists(input)) {
         if(!fileExists(output)) {
-            if(std::regex_search(getFileExtension(input), re)) {
-                if (getFileExtension(input).find(m_inputFlType) != std::string::npos) {
+            if(std::regex_search(getFileType(input), re)) {
+                if (getFileType(input).find(m_inputFlType) != std::string::npos) {
                     if (m_pid = fork()) {
                         waitpid(m_pid, &m_status, 0);
                     } else {
                         if (output.empty() || output == "") {
-                            std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + m_outputFlType; 
+                            std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + 
+                                String::toLower(m_outputFlType); 
                             execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
                                     input.c_str(), emptyOut.c_str(), NULL);
                         } else {
@@ -149,6 +200,7 @@ std::string Converter::convertImg(const std::string input, std::string output) {
         return m_msgFileNotExists;
     }
 }
+*/
 
 std::string Converter::convertAudio(const std::string input, std::string output) {
     std::regex re(m_audioPattern);
@@ -157,7 +209,7 @@ std::string Converter::convertAudio(const std::string input, std::string output)
     //std::regex re2(m_audioPattern);
     if (fileExists(input)) {
         if(!fileExists(output)) {
-            if(std::regex_search(getFileExtension(input), re)) {
+            if(std::regex_search(getFileType(input), re)) {
                 if (m_pid = fork()) {
                     waitpid(m_pid, &m_status, 0);
                 } else {

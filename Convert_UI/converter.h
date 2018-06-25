@@ -2,13 +2,16 @@
 #define CONVERTER_H
 
 #include <string>
+#include <regex>
 
 enum FileType {
     IMAGE = 0,
     AUIDO,
     VIDEO,
     AUDIO_VIDEO,
-    TEXT
+    TEXT,
+    DATA,
+    PRESENTATION
 };
 
 class Converter {
@@ -36,12 +39,14 @@ private:
     const std::string m_msgOutFileExists = "Output file does already exists!";
     const std::string m_msgFailure = "File can't be converted";
     const std::string m_msgNotFileType = "Input file has not the file type "; 
+    std::string m_errMsg; 
     const std::string m_exec_convert = "/usr/bin/convert";
     const std::string m_exec_ffmpeg = "/usr/bin/ffmpeg";
     const std::string m_exec_unoconv = "/usr/bin/unoconv"; 
 
     bool fileExists(const std::string& filePath);
     bool checkFileExtension(const std::string& output, FileType type); 
+    bool checkIOPaths(const std::string& input, const std::string& output, const std::regex& re); 
     //std::string getFileExtension(const std::string& filePath); 
 
 public:
@@ -51,7 +56,7 @@ public:
     std::string getInputFlType();
     bool checkProgram(const std::string cmd);
     
-    std::string getFileExtension(const std::string& filePath); 
+    std::string getFileType(const std::string& filePath); 
     std::string convertImg(const std::string input, std::string output);
     std::string convertAudio(const std::string input, std::string output); 
     std::string convertVid(const std::string input, std::string output);
