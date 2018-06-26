@@ -172,29 +172,41 @@ void ConvertGui::checkRequirements() {
     #endif
     if (conv.checkProgram(which + "convert")) {
         ui->tabImg->setEnabled(true);
+        ui->lblImgNA->hide();
     } else {
         ui->tabImg->setDisabled(true);
+        ui->lblImgNA->show();
     }
     if (conv.checkProgram(which + "ffmpeg")) {
         ui->tabAudio->setEnabled(true);
-        ui->tabAudio->setEnabled(true);
+        ui->tabVideo->setEnabled(true);
+        ui->lblAudNA->hide();
+        ui->lblVidNA->hide();
     } else {
         ui->tabAudio->setDisabled(true);
         ui->tabVideo->setDisabled(true);
+        ui->lblAudNA->show();
+        ui->lblVidNA->show();
     }
-    if (conv.checkProgram(which + "unoconv")) {
+    if (conv.checkProgram(which + "soffice")) {
         ui->tabText->setEnabled(true);
         ui->tabData->setEnabled(true);
         ui->tabPresentation->setEnabled(true);
+        ui->lblTxtNA->hide();
+        ui->lblDataNA->hide();
+        ui->lblPresNA->hide();
     } else {
         ui->tabText->setDisabled(true);
         ui->tabData->setDisabled(true);
         ui->tabPresentation->setDisabled(true);
+        ui->lblTxtNA->show();
+        ui->lblDataNA->show();
+        ui->lblPresNA->show();
     }
 }
 
 void ConvertGui::getLineEdits(){
-    lineEdits = this->findChildren<QLineEdit *>();
+    lineEdits = this->findChildren<QLineEdit*>();
 }
 
 void ConvertGui::clearLineEdits(){

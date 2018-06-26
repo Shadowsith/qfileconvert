@@ -260,7 +260,7 @@ std::string Converter::convertText(const std::string input, std::string output) 
         if (m_pid == fork()) {
             waitpid(m_pid, &m_status, 0);
         } else {
-            execl(m_exec_unoconv.c_str(), m_exec_unoconv.c_str(), input.c_str(), output.c_str(), NULL);
+            execl(m_exec_soffice.c_str(), m_exec_soffice.c_str(), input.c_str(), output.c_str(), NULL);
         }
         return m_msgSuccess;
     } else {

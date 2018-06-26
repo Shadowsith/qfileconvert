@@ -53,7 +53,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabImg">
      <property name="enabled">
@@ -229,6 +229,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="lblImgNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because ImageMagick is not installed!</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabAudio">
      <attribute name="title">
@@ -370,6 +383,19 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="lblAudNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because FFmpeg is not installed!</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabVideo">
@@ -618,6 +644,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="lblVidNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because FFmpeg is not installed!</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabText">
      <attribute name="title">
@@ -765,6 +804,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="lblTxtNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because Libre Office is not installed!</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabData">
      <attribute name="title">
@@ -825,6 +877,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="lblDataNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because Libre Office is not installed!</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabPresentation">
      <attribute name="title">
@@ -884,6 +949,19 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="lblPresNA">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>561</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>This tab is not available because Libre Office is not installed!</string>
+      </property>
      </widget>
     </widget>
    </widget>

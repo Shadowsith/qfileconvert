@@ -40,9 +40,16 @@ private:
     const std::string m_msgFailure = "File can't be converted";
     const std::string m_msgNotFileType = "Input file has not the file type "; 
     std::string m_errMsg; 
+#ifdef __linux__
     const std::string m_exec_convert = "/usr/bin/convert";
     const std::string m_exec_ffmpeg = "/usr/bin/ffmpeg";
-    const std::string m_exec_unoconv = "/usr/bin/unoconv"; 
+    const std::string m_exec_soffice = "/usr/bin/soffice"; 
+#endif
+#ifdef _WIN32
+    const std::string m_exec_convert = "convert.exe";
+    const std::string m_exec_ffmpeg = "ffmpeg.exe";
+    const std::string m_exec_soffice = "soffice.exe"; 
+#endif
     static std::string toLower(std::string str); 
 
     bool fileExists(const std::string& filePath);
