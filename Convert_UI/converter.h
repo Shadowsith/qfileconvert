@@ -24,7 +24,7 @@ private:
     std::string m_outputFlType;
     std::string m_iEnd;
     // common file extensions
-    std::string m_imgFileExt = "BMP|DDS|GIF|JPEG|PDF|PNG|PSD|TGA|TIF|TIFF";
+    std::string m_imgFileExt = "BMP|DDS|GIF|JPG|JPEG|PDF|PNG|PSD|TGA|TIF|TIFF";
     std::string m_audFileExt = "AIF|FLAC|M4A|MP3|MPA|WAV|WMA";
 
     // patterns search output form file command
@@ -43,6 +43,7 @@ private:
     const std::string m_exec_convert = "/usr/bin/convert";
     const std::string m_exec_ffmpeg = "/usr/bin/ffmpeg";
     const std::string m_exec_unoconv = "/usr/bin/unoconv"; 
+    static std::string toLower(std::string str); 
 
     bool fileExists(const std::string& filePath);
     bool checkFileExtension(const std::string& output, FileType type); 

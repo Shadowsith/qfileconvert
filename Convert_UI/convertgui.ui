@@ -53,7 +53,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabImg">
      <property name="enabled">
@@ -84,6 +84,11 @@
        </item>
        <item row="0" column="1">
         <widget class="QComboBox" name="cmbImgFrom">
+         <item>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>BMP</string>
@@ -155,6 +160,11 @@
        </item>
        <item row="1" column="1">
         <widget class="QComboBox" name="cmbImgTo">
+         <item>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>BMP</string>
@@ -248,6 +258,11 @@
          </property>
          <item>
           <property name="text">
+           <string>All</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>AIF</string>
           </property>
          </item>
@@ -302,6 +317,11 @@
        </item>
        <item row="1" column="1">
         <widget class="QComboBox" name="cmbAudTo">
+         <item>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>AIF</string>

@@ -12,12 +12,13 @@ class AboutWindow : public QWidget
     Q_OBJECT
 
 private:
-    Ui::AboutWindow *win;
-
-
-public:
     explicit AboutWindow(QWidget *parent = 0);
     ~AboutWindow();
+    static AboutWindow* instance;
+    Ui::AboutWindow *win;
+
+public:
+    static AboutWindow* openWindow();
 
 };
 

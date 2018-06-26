@@ -121,12 +121,20 @@ void ConvertGui::useFileExplorer(QLineEdit* le, FileType search, Target target){
         case FileType::IMAGE: {
             if (target == Target::SOURCE) {
                 type = ui->cmbImgFrom->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
+                if(type != "All")
+                    path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
+                else
+                    path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
+                                            m_imgFiles);
             } else {
                 type = ui->cmbImgTo->currentText();
-                path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
+                if(type != "All")
+                    path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
                                             type + " Files ( *." + type.toLower() + " )");
+                else
+                    path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
+                                            m_imgFiles);
             }
         } break;
         case FileType::AUIDO: {
@@ -196,7 +204,13 @@ void ConvertGui::clearLineEdits(){
 }
 
 void ConvertGui::openAboutWindow() {
-    aW = new AboutWindow();
-    aW->show();
+    AboutWindow *aW = AboutWindow::openWindow();
+    if (aW != 0) {
+        const int fHeight = aW->height();
+        const int fWidth = aW->width();
+        aW->setFixedSize(fWidth, fHeight);
+        aW->show();
+    }
 }
+
 

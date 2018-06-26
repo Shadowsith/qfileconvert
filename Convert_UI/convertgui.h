@@ -25,8 +25,11 @@ class ConvertGui : public QMainWindow
 private:
     Ui::ConvertGui *ui;
     QList<QLineEdit *> lineEdits;
-    //QString imgFiles = "Image Files (*.png, *.jpg, *.png, *.dds)"; //"Image Files (*.bmp, *.dds, *.gif, *.jpeg, *.jpg, *.pdf, *.png, *.psd, *.tga, *.thm, *.tif, *.tiff, *.yuv)";
-    //QString audioFiles = "Audio Files (*.aif, *.flac, *.iff, *.m3u, *.m4a, *.mid, *.mp3, *.mp4, *.wav, *.wma)";
+    QString m_imgFiles = "Image Files (*.bmp *.dds *.gif *.jpeg, *.jpg *.pdf *.png *.psd *.tga *.tif *.tiff)";
+    QString m_audFiles = "Audio Files (*.aif *.flac *.m4a *.mp3 *.mpa *.wav, *.wma)";
+    QString m_vidInFiles;
+    QString m_vidOutFiles;
+    QString m_textInFiles;
     //QString videoFiles = "Video Files (*.3g2, *.3gp, *.asf, *.avi, *.flv, *.m4v, *.mov, *.mp4, *.mpg, *.rm, *.srt, *.swf, *.vob, *.wmv)";
     //QString textFiles = "Text Files (*.doc, *.docx, *.log, *.msg, *.odt, *.pages, *.rtf, *.tex, *.txt, *.wpd, *.wps)";
 
@@ -36,7 +39,7 @@ private:
 
 public:
     explicit ConvertGui(QWidget *parent = 0);
-    AboutWindow *aW;
+    QList<AboutWindow*> aWCon;
     ~ConvertGui();
     void useFileExplorer(QLineEdit* le, FileType search, Target target);
     void convertFiles();

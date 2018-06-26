@@ -12,7 +12,6 @@
 #include <array>
 #include <regex>
 #include "converter.h"
-#include "String.h"
 
 Converter::Converter() {}
 
@@ -39,8 +38,8 @@ Converter::Converter(std::string iFileType, std::string oFileType) {
     if (iFileType == "TXT") m_inputFlType = "text";
 
     m_outputFlType = oFileType; 
-    m_imgFileExt = m_imgFileExt + "|" + String::toLower(m_imgFileExt); 
-    m_audFileExt = m_audFileExt + "|" + String::toLower(m_audFileExt); 
+    m_imgFileExt = m_imgFileExt + "|" + Converter::toLower(m_imgFileExt); 
+    m_audFileExt = m_audFileExt + "|" + Converter::toLower(m_audFileExt); 
 }
 
 Converter::~Converter() {}
@@ -49,6 +48,11 @@ Converter::~Converter() {}
 
 std::string Converter::getInputFlType() {
     return m_inputFlType;
+}
+
+std::string Converter::toLower(std::string str) {
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower); 
+    return str; 
 }
 
 bool Converter::checkProgram(const std::string cmd) {
@@ -112,7 +116,12 @@ bool Converter::checkIOPaths(const std::string& input, const std::string& output
         if(!fileExists(output)) {
             if(std::regex_search(getFileType(input), re)) {
                 if (getFileType(input).find(m_inputFlType) != std::string::npos) {
-                    return true; 
+                    if(checkFileExtension(output, FileType::IMAGE)) {
+                        return true;
+                    } else {
+                        m_errMsg = m_imgFileExt;
+                        return false;
+                    }
                 } else {
                     m_errMsg = m_msgNotFileType + m_inputFlType;
                     return false;
@@ -153,7 +162,7 @@ std::string Converter::convertImg(const std::string input, std::string output) {
         } else {
             if (output.empty() || output == "") {
                 std::string emptyOut = input.substr(0, input.rfind("/")+1) + "out." + 
-                    String::toLower(m_outputFlType); 
+                    Converter::toLower(m_outputFlType); 
                 execl(m_exec_convert.c_str(), m_exec_convert.c_str(), 
                         input.c_str(), emptyOut.c_str(), NULL);
             } else {
